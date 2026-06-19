@@ -2,16 +2,17 @@
 {% block title %}태그 | {{ SITENAME }}{% endblock %}
 
 {% block content %}
-<div id="main" class="alt">
-  <section id="one">
-    <div class="inner">
-      <header class="major"><h1>태그 목록</h1></header>
-      <div class="tag-cloud">
-        {% for tag, articles in tags | sort %}
-          <a href="{{ SITEURL }}/{{ tag.url }}" class="tag">{{ tag }} <span>({{ articles | count }})</span></a>
-        {% endfor %}
-      </div>
+<div id="main">
+  <!-- Post -->
+  <article class="post">
+    <header class="major">
+      <h1>태그 목록</h1>
+    </header>
+    <div class="tag-cloud" style="text-align: center; line-height: 3em;">
+      {% for tag, articles in tags | sort %}
+        <a href="{{ SITEURL }}/{{ tag.url }}" class="button small" style="margin: 5px;">#{{ tag }} ({{ articles | count }})</a>
+      {% endfor %}
     </div>
-  </section>
+  </article>
 </div>
 {% endblock %}

@@ -2,19 +2,31 @@
 {% block title %}{{ category }} | {{ SITENAME }}{% endblock %}
 
 {% block content %}
-<div id="main" class="alt">
-  <section id="one">
-    <div class="inner">
-      <header class="major"><h1>{{ category }}</h1></header>
-      <div class="tiles-list">
-        {% for article in articles %}
-        <div class="list-item">
-          <h2><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h2>
-          <p class="article-meta">{{ article.date.strftime('%Y.%m.%d') }}</p>
-        </div>
-        {% endfor %}
-      </div>
+<div id="main">
+  <!-- Post -->
+  <article class="post">
+    <header class="major">
+      <h1>{{ category }}</h1>
+      <p>'{{ category }}' 카테고리의 글 목록입니다.</p>
+    </header>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>날짜</th>
+            <th>제목</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for article in articles %}
+          <tr>
+            <td style="white-space: nowrap;">{{ article.date.strftime('%Y.%m.%d') }}</td>
+            <td><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
-  </section>
+  </article>
 </div>
 {% endblock %}

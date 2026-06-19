@@ -2,18 +2,30 @@
 {% block title %}카테고리 | {{ SITENAME }}{% endblock %}
 
 {% block content %}
-<div id="main" class="alt">
-  <section id="one">
-    <div class="inner">
-      <header class="major"><h1>카테고리</h1></header>
-      <ul class="tiles-list">
-        {% for cat, articles in categories %}
-        <li class="list-item">
-          <h3><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }} ({{ articles | count }})</a></h3>
-        </li>
-        {% endfor %}
-      </ul>
+<div id="main">
+  <!-- Post -->
+  <article class="post">
+    <header class="major">
+      <h1>카테고리 목록</h1>
+    </header>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>카테고리</th>
+            <th>글 개수</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cat, articles in categories %}
+          <tr>
+            <td><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></td>
+            <td>{{ articles | count }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
-  </section>
+  </article>
 </div>
 {% endblock %}

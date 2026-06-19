@@ -2,26 +2,38 @@
 {% block title %}전체 글 | {{ SITENAME }}{% endblock %}
 
 {% block content %}
-<div id="main" class="alt">
-  <section id="one">
-    <div class="inner">
-      <header class="major"><h1>전체 글 목록</h1></header>
-      <div class="tiles-list">
-        {% for article in dates %}
-        <div class="list-item">
-          <h2><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h2>
-          <p class="article-meta">{{ article.date.strftime('%Y.%m.%d') }}
-            {% if article.tags %}
-              &nbsp;·&nbsp;
-              {% for tag in article.tags[:3] %}
-                <a href="{{ SITEURL }}/{{ tag.url }}" class="tag">{{ tag }}</a>
-              {% endfor %}
-            {% endif %}
-          </p>
-        </div>
-        {% endfor %}
-      </div>
+<div id="main">
+  <!-- Post -->
+  <article class="post">
+    <header class="major">
+      <h1>전체 글 목록</h1>
+    </header>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>날짜</th>
+            <th>제목</th>
+            <th>태그</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for article in dates %}
+          <tr>
+            <td style="white-space: nowrap;">{{ article.date.strftime('%Y.%m.%d') }}</td>
+            <td><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></td>
+            <td>
+              {% if article.tags %}
+                {% for tag in article.tags[:3] %}
+                  <a href="{{ SITEURL }}/{{ tag.url }}">#{{ tag }}</a>{% if not loop.last %}, {% endif %}
+                {% endfor %}
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
-  </section>
+  </article>
 </div>
 {% endblock %}
