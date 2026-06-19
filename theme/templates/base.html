@@ -1,140 +1,96 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="{{ DEFAULT_LANG }}">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
-  {% block meta_description %}<meta name="description" content="{{ SITE_DESCRIPTION }}">{% endblock %}
-  {% block og_tags %}
-  <meta property="og:site_name" content="{{ SITENAME }}">
-  <meta property="og:locale" content="{{ SITE_OG_LOCALE }}">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="{{ SITENAME }}">
-  <meta property="og:description" content="{{ SITE_DESCRIPTION }}">
-  {% endblock %}
-  {% block head_extra %}{% endblock %}
-  <link rel="alternate" type="application/rss+xml" title="{{ SITENAME }}" href="{{ SITEURL }}/feeds/all.rss.xml">
-  <link rel="preconnect" href="https://hangeul.pstatic.net" crossorigin>
-  <link rel="preconnect" href="https://www.googletagmanager.com">
-  <link rel="preconnect" href="https://picsum.photos" crossorigin>
-  <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css">
-  {% if GOOGLE_ANALYTICS %}
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    window.addEventListener('load', function() {
-      var s = document.createElement('script');
-      s.async = true;
-      s.src = 'https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS }}';
-      s.onload = function() {
-        gtag('js', new Date());
-        gtag('config', '{{ GOOGLE_ANALYTICS }}');
-      };
-      document.head.appendChild(s);
-    });
-  </script>
-  {% endif %}
-</head>
-<body class="is-loading">
+	<head>
+		<title>{% block title %}{{ SITENAME }}{% endblock %}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        {% block meta_description %}<meta name="description" content="{{ SITE_DESCRIPTION }}">{% endblock %}
+        {% block og_tags %}
+        <meta property="og:site_name" content="{{ SITENAME }}">
+        <meta property="og:locale" content="{{ SITE_OG_LOCALE }}">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="{{ SITENAME }}">
+        <meta property="og:description" content="{{ SITE_DESCRIPTION }}">
+        {% endblock %}
+        {% block head_extra %}{% endblock %}
+        <link rel="alternate" type="application/rss+xml" title="{{ SITENAME }}" href="{{ SITEURL }}/feeds/all.rss.xml">
+		<link rel="stylesheet" href="{{ SITEURL }}/theme/css/main.css" />
+		<noscript><link rel="stylesheet" href="{{ SITEURL }}/theme/css/noscript.css" /></noscript>
+        {% if GOOGLE_ANALYTICS %}
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          window.addEventListener('load', function() {
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS }}';
+            s.onload = function() {
+              gtag('js', new Date());
+              gtag('config', '{{ GOOGLE_ANALYTICS }}');
+            };
+            document.head.appendChild(s);
+          });
+        </script>
+        {% endif %}
+	</head>
+	<body class="is-preload">
 
-  <!-- Header -->
-  <header id="header" class="alt">
-    <a href="{{ SITEURL }}/" class="logo">
-      <strong>{{ SITENAME[:2] }}</strong><span>{{ SITENAME[2:] }}</span>
-    </a>
-    <nav aria-label="주 메뉴">
-      <a href="{{ SITEURL }}/archives.html">전체글</a>
-      <a href="{{ SITEURL }}/tags.html">태그</a>
-    </nav>
-  </header>
+		<!-- Wrapper -->
+			<div id="wrapper">
 
-  <!-- Wrapper -->
-  <main id="wrapper">
-    {% block content %}{% endblock %}
-  </main>
+				<!-- Header -->
+					<header id="header">
+						<a href="{{ SITEURL }}/" class="logo">{{ SITENAME }}</a>
+					</header>
 
-  <!-- Footer -->
-  <footer id="footer">
-    <div class="inner">
-      <ul class="footer-links">
-        <li><a href="https://blog.naver.com/khfamilylove" target="_blank" rel="noopener">네이버 블로그</a></li>
-        <li><a href="{{ SITEURL }}/feeds/all.rss.xml">RSS</a></li>
-      </ul>
-      <ul class="copyright">
-        <li>&copy; {{ SITENAME }}</li>
-        <li>{{ BUSINESS_ADDRESS_LOCALITY }}</li>
-      </ul>
-    </div>
-  </footer>
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li class="{% if output_file == 'index.html' or output_file.startswith('index') %}active{% endif %}"><a href="{{ SITEURL }}/">홈</a></li>
+							<li class="{% if output_file == 'archives.html' %}active{% endif %}"><a href="{{ SITEURL }}/archives.html">전체글</a></li>
+							<li class="{% if output_file == 'tags.html' %}active{% endif %}"><a href="{{ SITEURL }}/tags.html">태그</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="https://blog.naver.com/khfamilylove" target="_blank" rel="noopener" class="icon solid fa-link"><span class="label">Naver Blog</span></a></li>
+							<li><a href="{{ SITEURL }}/feeds/all.rss.xml" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
+						</ul>
+					</nav>
 
-  <script>
-    window.addEventListener('pagehide', function(e) {
-      if (e.persisted) {
-        document.querySelectorAll('.is-transitioning').forEach(function(el) {
-          el.classList.remove('is-transitioning');
-        });
-      }
-    });
+				<!-- Main -->
+                    {% block content %}{% endblock %}
 
-    window.addEventListener('pageshow', function(e) {
-      if (e.persisted) {
-        document.querySelectorAll('.is-transitioning').forEach(function(el) {
-          el.classList.remove('is-transitioning');
-        });
-        document.body.classList.remove('is-loading');
-      }
-    });
+				<!-- Footer -->
+					<footer id="footer">
+						<section class="split contact">
+							<section class="alt">
+								<h3>주소</h3>
+								<p>{{ BUSINESS_ADDRESS_LOCALITY }}</p>
+							</section>
+							<section>
+								<h3>소셜 링크</h3>
+								<ul class="icons alt" style="justify-content: center;">
+									<li><a href="https://blog.naver.com/khfamilylove" target="_blank" rel="noopener" class="icon solid alt fa-link"><span class="label">Naver Blog</span></a></li>
+									<li><a href="{{ SITEURL }}/feeds/all.rss.xml" class="icon solid alt fa-rss"><span class="label">RSS</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
 
-    window.addEventListener('load', function() {
-      document.body.classList.remove('is-loading');
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; {{ SITENAME }}</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
 
-      var header = document.getElementById('header');
-      var banner = document.getElementById('banner');
-      var wasAlt = true;
+			</div>
 
-      function onScroll() {
-        var bannerBottom = banner ? (banner.offsetTop + banner.offsetHeight - header.offsetHeight) : 60;
-        var isAlt = window.scrollY <= bannerBottom;
-        if (!isAlt && wasAlt) {
-          header.classList.remove('alt');
-          header.classList.add('reveal');
-        } else if (isAlt && !wasAlt) {
-          header.classList.add('alt');
-          header.classList.remove('reveal');
-        }
-        wasAlt = isAlt;
-      }
+		<!-- Scripts -->
+			<script src="{{ SITEURL }}/theme/js/jquery.min.js"></script>
+			<script src="{{ SITEURL }}/theme/js/jquery.scrollex.min.js"></script>
+			<script src="{{ SITEURL }}/theme/js/jquery.scrolly.min.js"></script>
+			<script src="{{ SITEURL }}/theme/js/browser.min.js"></script>
+			<script src="{{ SITEURL }}/theme/js/breakpoints.min.js"></script>
+			<script src="{{ SITEURL }}/theme/js/util.js"></script>
+			<script src="{{ SITEURL }}/theme/js/main.js"></script>
 
-      window.addEventListener('scroll', onScroll);
-      onScroll();
-    });
-
-    // Tiles: clone .link as full-cover anchor (원본 Forty 테마 방식)
-    document.querySelectorAll('.tiles > article').forEach(function(article) {
-      var link = article.querySelector('.link');
-      if (!link) return;
-      var clone = link.cloneNode(false);
-      clone.textContent = '';
-      clone.classList.add('primary');
-      clone.setAttribute('aria-label', link.textContent.trim());
-      article.appendChild(clone);
-      [link, clone].forEach(function(el) {
-        el.addEventListener('click', function(e) {
-          var href = link.getAttribute('href');
-          e.stopPropagation();
-          e.preventDefault();
-          article.classList.add('is-transitioning');
-          var wrapper = document.getElementById('wrapper');
-          if (wrapper) wrapper.classList.add('is-transitioning');
-          setTimeout(function() {
-            if (link.getAttribute('target') === '_blank')
-              window.open(href);
-            else
-              location.href = href;
-          }, 500);
-        });
-      });
-    });
-  </script>
-</body>
+	</body>
 </html>
