@@ -1,0 +1,75 @@
+# ─── 블로그 소스 (크롤링 대상) ──────────────────────────────────
+blog:
+  id: "khfamilylove"
+  base_url: "https://blog.naver.com"
+  rss_url: "https://rss.blog.naver.com/khfamilylove.xml"
+  api:
+    post_list: "https://blog.naver.com/PostTitleListAsync.naver"
+    post_view: "https://blog.naver.com/PostView.nhn"
+    count_per_page: 30
+  crawler:
+    request_delay: 0.5
+    user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    headers:
+      Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+      Accept-Language: "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+      Accept-Encoding: "gzip, deflate, br"
+
+# ─── Gemini ──────────────────────────────────────────────────────
+gemini:
+  embedding:
+    model: "gemini-embedding-001"
+    dimension: 3072
+    title_weight: 3        # 임베딩 시 제목 반복 횟수 (가중치 효과)
+    max_text_length: 30000
+    max_quota_errors: 5
+  generation:
+    model: "gemini-2.5-flash"
+    min_length: 800
+    max_length: 1500
+    config:
+      temperature: 0.8
+      top_p: 0.95
+      top_k: 40
+      max_output_tokens: 8192
+
+# ─── MiniMax (Gemini 차단 시 폴백) ──────────────────────────────
+minimax:
+  api_base: "https://api.minimax.io/v1"
+  model: "MiniMax-M2.7"
+  config:
+    temperature: 0.8
+    top_p: 0.95
+    max_completion_tokens: 8192
+    frequency_penalty: 0.3  # 반복 생성 방지
+
+# ─── Firebase ────────────────────────────────────────────────────
+firebase:
+  credentials_file: "firebase-credentials.json"
+  collection_name: "blog_posts"
+
+# ─── 글 생성 설정 ────────────────────────────────────────────────
+post_generation:
+  source_clinic_location: '관평동'  # 원본 블로그 제목에서 제거할 지역명
+  exclude_title_keywords:   # 기준 포스트 후보에서 제외할 제목 키워드
+    - 공지
+    - 안내
+  default_tags:             # 모든 생성 글에 항상 앞에 추가되는 태그
+    - 관평동한의원
+    - 경희가족한의원
+    - 대전한의원
+    - 유성구한의원
+  tag_typos:                # 태그 오타 교정 사전 (wrong: correct)
+    한원의원: 한의원
+    한원: 한의원
+
+# ─── 포스트 선택 ─────────────────────────────────────────────────
+post_selection:
+  similar_posts_count: 4   # 참고할 유사 포스트 수
+  min_posts_required: 4    # 유사 포스트 검색에 필요한 최소 포스트 수
+  topic_search:
+    score_weights:
+      title: 10
+      tag: 5
+      content: 3
+    content_preview_length: 500

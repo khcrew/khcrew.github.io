@@ -1,0 +1,36 @@
+# Custom
+
+# Shared code symlink target (로컬=symlink, CI=checkout)
+_shared
+
+# dev
+.dev/
+.agents/
+.claude/
+.gemini/
+
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Temp directories
+temp/
+
+# Pelican build output (gh-pages 브랜치로 배포)
+output/
+
+# Development tests
+dev_tests/
+
+# Firebase credentials
+firebase-credentials.json
+
+# Environment variables
+.env

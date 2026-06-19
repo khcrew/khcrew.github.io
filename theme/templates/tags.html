@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}태그 | {{ SITENAME }}{% endblock %}
+
+{% block content %}
+<div id="main" class="alt">
+  <section id="one">
+    <div class="inner">
+      <header class="major"><h1>태그 목록</h1></header>
+      <div class="tag-cloud">
+        {% for tag, articles in tags | sort %}
+          <a href="{{ SITEURL }}/{{ tag.url }}" class="tag">{{ tag }} <span>({{ articles | count }})</span></a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

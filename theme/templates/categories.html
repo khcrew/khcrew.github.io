@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}카테고리 | {{ SITENAME }}{% endblock %}
+
+{% block content %}
+<div id="main" class="alt">
+  <section id="one">
+    <div class="inner">
+      <header class="major"><h1>카테고리</h1></header>
+      <ul class="tiles-list">
+        {% for cat, articles in categories %}
+        <li class="list-item">
+          <h3><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }} ({{ articles | count }})</a></h3>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+</div>
+{% endblock %}

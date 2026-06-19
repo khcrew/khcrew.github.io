@@ -1,0 +1,49 @@
+name: Daily Blog Pipeline
+
+on:
+  schedule:
+    - cron: '57 1 * * *'  # KST 10:57 (UTC 01:57)
+  workflow_dispatch:       # 수동 실행 가능
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Checkout shared source (khfamily)
+        uses: actions/checkout@v4
+        with:
+          repository: khfamily/khfamily.github.io
+          token: ${{ secrets.GH_PAT }}
+          path: _shared
+          fetch-depth: 1
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Run pipeline
+        env:
+          GEMINI_API_KEY_8074: ${{ secrets.GEMINI_API_KEY_8074 }}
+          GEMINI_API_KEY_8076: ${{ secrets.GEMINI_API_KEY_8076 }}
+          GEMINI_API_KEY_8078: ${{ secrets.GEMINI_API_KEY_8078 }}
+          GEMINI_API_KEY_8080: ${{ secrets.GEMINI_API_KEY_8080 }}
+          MINIMAX_API_KEY: ${{ secrets.MINIMAX_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ vars.TELEGRAM_CHAT_ID }}
+          FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
+        run: uv run python main.py
+
+      - name: Commit new content to main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add site/content/
+          git diff --staged --quiet || (git commit -m "chore: add generated posts [skip ci]" && git push)

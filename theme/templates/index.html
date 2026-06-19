@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}{{ SITENAME }}{% endblock %}
+
+{% block og_tags %}
+{{ super() }}
+{% if articles_page.object_list %}
+<meta property="og:image" content="https://picsum.photos/seed/{{ articles_page.object_list[0].slug }}/800/400">
+{% endif %}
+{% endblock %}
+
+{% block head_extra %}
+{% if articles_page.object_list %}
+<link rel="preload" as="image" href="https://picsum.photos/seed/{{ articles_page.object_list[0].slug }}/600/300" fetchpriority="high">
+{% endif %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MedicalBusiness","name":"{{ AUTHOR }}","address":{"@type":"PostalAddress","addressLocality":"{{ BUSINESS_ADDRESS_LOCALITY }}"},"url":"{{ SITEURL }}/"}
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- Banner -->
+<section id="banner" class="major" aria-label="소개">
+  <div class="inner">
+    <header class="major">
+      <h1>{{ SITENAME }}</h1>
+    </header>
+    <div class="content">
+      <p>{{ SITE_SUBTITLE | safe }}</p>
+    </div>
+  </div>
+</section>
+
+<!-- Main -->
+<div id="main">
+  <section class="tiles">
+    {% for article in articles_page.object_list %}
+    <article style="background-image: url('https://picsum.photos/seed/{{ article.slug }}/600/300');">
+      <header class="major">
+        <h2><a href="{{ SITEURL }}/{{ article.url }}" class="link">{{ article.title }}</a></h2>
+        <p>{{ article.date.strftime('%Y.%m.%d') }}
+          {% if article.tags %}
+            &nbsp;·&nbsp;{{ article.tags[0] }}
+          {% endif %}
+        </p>
+      </header>
+    </article>
+    {% endfor %}
+  </section>
+
+  {% if articles_page.has_other_pages() %}
+  <section id="pagination">
+    <div class="inner">
+      <ul class="pagination">
+        {% if articles_page.has_previous() %}
+          <li><a href="{{ SITEURL }}/{{ articles_previous_page.save_as }}" class="button">← 이전</a></li>
+        {% endif %}
+        <li><span class="page-num">{{ articles_page.number }} / {{ articles_page.paginator.num_pages }}</span></li>
+        {% if articles_page.has_next() %}
+          <li><a href="{{ SITEURL }}/{{ articles_next_page.save_as }}" class="button">다음 →</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}
