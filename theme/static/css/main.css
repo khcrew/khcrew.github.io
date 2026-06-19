@@ -4816,3 +4816,17 @@ button,
         font-size: 1.75rem !important;
     }
 }
+
+/* Korean Typography Optimizations */
+body {
+    font-weight: 400 !important;
+    letter-spacing: -0.01em !important;
+}
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.03em !important;
+}
+p {
+    text-align: justify;
+    word-break: keep-all !important;
+    word-wrap: break-word;
+}
