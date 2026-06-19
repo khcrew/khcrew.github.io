@@ -4712,3 +4712,71 @@ input, select, textarea {
     text-transform: none;
     letter-spacing: 0;
 }
+
+/* ── Custom Overrides ── */
+
+/* Apply Pretendard to all sans-serif/gothic elements */
+h1, h2, h3, h4, h5, h6,
+input, select, textarea, button, .button,
+table th,
+.pagination a, .pagination span,
+#header .logo,
+#nav,
+#intro,
+#footer,
+#copyright {
+    font-family: "Pretendard", "Source Sans Pro", Helvetica, sans-serif !important;
+}
+
+/* Remove logo/title border box */
+#header .logo {
+    border: 0 !important;
+}
+#header .logo:hover {
+    border: 0 !important;
+    color: #18bfef !important;
+}
+
+/* Custom Tag Badge Styles */
+.tag-badge {
+    display: inline-block;
+    background-color: #f2f4f6;
+    color: #515961 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    border-radius: 2rem;
+    font-family: "Pretendard", "Source Sans Pro", Helvetica, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    height: 2.25rem;
+    line-height: 2.25rem;
+    padding: 0 1rem;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.tag-badge:hover {
+    background-color: #18bfef;
+    color: #ffffff !important;
+}
+
+/* Button & Pagination Rounded Corners */
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+button,
+.button {
+    border-radius: 6px !important;
+}
+
+.pagination a,
+.pagination span {
+    border-radius: 6px !important;
+}
