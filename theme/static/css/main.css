@@ -4716,9 +4716,14 @@ input, select, textarea {
 
 /* ── Custom Overrides ── */
 
+/* Apply MaruBuri to body text */
+body, input, select, textarea {
+    font-family: "MaruBuri", "Merriweather", Georgia, serif !important;
+}
+
 /* Apply Pretendard to all sans-serif/gothic elements */
 h1, h2, h3, h4, h5, h6,
-input, select, textarea, button, .button,
+button, .button,
 table th,
 .pagination a, .pagination span,
 #header .logo,
@@ -4727,6 +4732,22 @@ table th,
 #footer,
 #copyright {
     font-family: "Pretendard", "Source Sans Pro", Helvetica, sans-serif !important;
+}
+
+/* Article Body Layout Optimizations */
+.article-body p {
+    line-height: 1.8 !important;
+    margin-bottom: 1.5rem !important;
+}
+.article-body h2, .article-body h3 {
+    margin-top: 2.5rem !important;
+    margin-bottom: 1rem !important;
+}
+.article-body blockquote {
+    border-left: 4px solid #18bfef !important;
+    background: #f8fafc !important;
+    padding: 1rem 1.5rem !important;
+    margin: 2rem 0 !important;
 }
 
 /* Remove logo/title border box */
