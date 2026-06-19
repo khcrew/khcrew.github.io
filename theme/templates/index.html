@@ -10,7 +10,7 @@
 
 {% block head_extra %}
 {% if articles_page.object_list %}
-<link rel="preload" as="image" href="https://picsum.photos/seed/{{ articles_page.object_list[0].slug }}/600/300" fetchpriority="high">
+<link rel="preload" as="image" href="https://picsum.photos/seed/{{ articles_page.object_list[0].slug }}/800/400" fetchpriority="high">
 {% endif %}
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"MedicalBusiness","name":"{{ AUTHOR }}","address":{"@type":"PostalAddress","addressLocality":"{{ BUSINESS_ADDRESS_LOCALITY }}"},"url":"{{ SITEURL }}/"}
@@ -18,49 +18,66 @@
 {% endblock %}
 
 {% block content %}
-<!-- Banner -->
-<section id="banner" class="major" aria-label="소개">
-  <div class="inner">
-    <header class="major">
-      <h1>{{ SITENAME }}</h1>
-    </header>
-    <div class="content">
-      <p>{{ SITE_SUBTITLE | safe }}</p>
-    </div>
-  </div>
-</section>
-
-<!-- Main -->
 <div id="main">
-  <section class="tiles">
-    {% for article in articles_page.object_list %}
-    <article style="background-image: url('https://picsum.photos/seed/{{ article.slug }}/600/300');">
-      <header class="major">
-        <h2><a href="{{ SITEURL }}/{{ article.url }}" class="link">{{ article.title }}</a></h2>
-        <p>{{ article.date.strftime('%Y.%m.%d') }}
-          {% if article.tags %}
-            &nbsp;·&nbsp;{{ article.tags[0] }}
-          {% endif %}
-        </p>
-      </header>
-    </article>
-    {% endfor %}
-  </section>
 
-  {% if articles_page.has_other_pages() %}
-  <section id="pagination">
-    <div class="inner">
-      <ul class="pagination">
+  {% if articles_page.object_list %}
+    {% set first_article = articles_page.object_list[0] %}
+    {% if articles_page.number == 1 %}
+      <!-- Featured Post -->
+      <article class="post featured">
+        <header class="major">
+          <span class="date">{{ first_article.date.strftime('%Y.%m.%d') }}</span>
+          <h2><a href="{{ SITEURL }}/{{ first_article.url }}">{{ first_article.title }}</a></h2>
+          <p>{{ first_article.summary | striptags | truncate(200) }}</p>
+        </header>
+        <a href="{{ SITEURL }}/{{ first_article.url }}" class="image main"><img src="https://picsum.photos/seed/{{ first_article.slug }}/800/400" alt="{{ first_article.title }}" /></a>
+        <ul class="actions special">
+          <li><a href="{{ SITEURL }}/{{ first_article.url }}" class="button large">자세히 보기</a></li>
+        </ul>
+      </article>
+    {% endif %}
+
+    <!-- Posts Grid -->
+    <section class="posts">
+      {% for article in articles_page.object_list %}
+        {% if articles_page.number > 1 or not loop.first %}
+          <article>
+            <header>
+              <span class="date">{{ article.date.strftime('%Y.%m.%d') }}</span>
+              <h2><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h2>
+            </header>
+            <a href="{{ SITEURL }}/{{ article.url }}" class="image fit"><img src="https://picsum.photos/seed/{{ article.slug }}/600/400" alt="{{ article.title }}" /></a>
+            <p>{{ article.summary | striptags | truncate(120) }}</p>
+            <ul class="actions special">
+              <li><a href="{{ SITEURL }}/{{ article.url }}" class="button">자세히 보기</a></li>
+            </ul>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </section>
+
+    <!-- Pagination -->
+    {% if articles_page.has_other_pages() %}
+    <footer>
+      <div class="pagination">
         {% if articles_page.has_previous() %}
-          <li><a href="{{ SITEURL }}/{{ articles_previous_page.save_as }}" class="button">← 이전</a></li>
+          <a href="{{ SITEURL }}/{{ articles_previous_page.save_as }}" class="previous">이전</a>
+        {% else %}
+          <span class="previous disabled">이전</span>
         {% endif %}
-        <li><span class="page-num">{{ articles_page.number }} / {{ articles_page.paginator.num_pages }}</span></li>
+        
+        <span class="page-info" style="margin: 0 1.5em; vertical-align: middle;">{{ articles_page.number }} / {{ articles_page.paginator.num_pages }}</span>
+        
         {% if articles_page.has_next() %}
-          <li><a href="{{ SITEURL }}/{{ articles_next_page.save_as }}" class="button">다음 →</a></li>
+          <a href="{{ SITEURL }}/{{ articles_next_page.save_as }}" class="next">다음</a>
+        {% else %}
+          <span class="next disabled">다음</span>
         {% endif %}
-      </ul>
-    </div>
-  </section>
+      </div>
+    </footer>
+    {% endif %}
+
   {% endif %}
+
 </div>
 {% endblock %}
