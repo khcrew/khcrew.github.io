@@ -2,7 +2,7 @@ import os
 
 # ── Site ──────────────────────────────────────────────────────
 AUTHOR   = '경희가족한의원'
-SITENAME = '경희가족한의원 건강 블로그'
+SITENAME = '경희가족한의원 건강노트'
 TIMEZONE     = 'Asia/Seoul'
 DEFAULT_LANG = 'ko'
 
@@ -46,8 +46,8 @@ AUTHOR_FEED_RSS        = None
 # ── Theme ─────────────────────────────────────────────────────
 THEME = 'theme'
 
-SITE_DESCRIPTION       = '대전 관평동 경희가족한의원의 건강 정보 블로그입니다. 한의학 치료와 질환별 건강 정보를 제공합니다.'
-SITE_SUBTITLE          = '대전 관평동 경희가족한의원<br>건강 정보 블로그'
+SITE_DESCRIPTION       = '대전 관평동 경희가족한의원의 건강노트입니다. 한의학 치료와 일상에 활력을 더하는 건강 정보를 제공합니다.'
+SITE_SUBTITLE          = '대전 관평동 경희가족한의원<br>일상에 활력을 더하는 건강 정보 가이드'
 SITE_OG_LOCALE         = 'ko_KR'
 BUSINESS_ADDRESS_LOCALITY = '대전 관평동'
 GOOGLE_ANALYTICS       = ''
