@@ -34,32 +34,28 @@
 {% endblock %}
 
 {% block content %}
-<div id="main" class="alt">
-  <section id="one">
-    <div class="inner">
-      <header class="major">
-        <h1>{{ article.title }}</h1>
-      </header>
-      <p class="article-meta">
-        {{ article.date.strftime('%Y년 %m월 %d일') }}
-        {% if article.tags %}
-          &nbsp;·&nbsp;
+<div id="main">
+  <!-- Post -->
+  <article class="post">
+    <header class="major">
+      <span class="date">{{ article.date.strftime('%Y년 %m월 %d일') }}</span>
+      <h1>{{ article.title }}</h1>
+      {% if article.tags %}
+        <p class="article-tags" style="margin-top: 1em;">
           {% for tag in article.tags %}
-            <a href="{{ SITEURL }}/{{ tag.url }}" class="tag">{{ tag }}</a>{% if not loop.last %} {% endif %}
+            <a href="{{ SITEURL }}/{{ tag.url }}" class="button small">#{{ tag }}</a>{% if not loop.last %} {% endif %}
           {% endfor %}
-        {% endif %}
-      </p>
-      <img class="article-hero-image"
-           src="https://picsum.photos/seed/{{ article.slug }}/800/400"
-           alt="{{ article.title }} 관련 이미지"
-           fetchpriority="high" loading="eager">
-      <div class="article-body">
-        {{ article.content }}
-      </div>
-      <div class="back-link">
-        <a href="{{ SITEURL }}/" class="button">← 목록으로</a>
-      </div>
+        </p>
+      {% endif %}
+    </header>
+    <div class="image main"><img src="https://picsum.photos/seed/{{ article.slug }}/800/400" alt="{{ article.title }}" /></div>
+    <div class="article-body">
+      {{ article.content }}
     </div>
-  </section>
+    <hr />
+    <ul class="actions special">
+      <li><a href="{{ SITEURL }}/" class="button">목록으로</a></li>
+    </ul>
+  </article>
 </div>
 {% endblock %}
