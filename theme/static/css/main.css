@@ -4802,3 +4802,17 @@ button,
 .pagination span {
     border-radius: 6px !important;
 }
+
+/* Reduce post title sizes (featured post h2 and detail page h1) */
+#main > .post header.major > h1,
+#main > .post header.major h2 {
+    font-size: 2.5rem !important;
+    line-height: 1.2 !important;
+}
+
+@media screen and (max-width: 736px) {
+    #main > .post header.major > h1,
+    #main > .post header.major h2 {
+        font-size: 1.75rem !important;
+    }
+}
