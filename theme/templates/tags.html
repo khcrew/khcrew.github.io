@@ -10,7 +10,7 @@
     </header>
     <div class="tag-cloud" style="text-align: center; line-height: 3em;">
       {% for tag, articles in tags | sort %}
-        <a href="{{ SITEURL }}/{{ tag.url }}" class="button small" style="margin: 5px;">#{{ tag }} ({{ articles | count }})</a>
+        <a href="{{ SITEURL }}/{{ tag.url }}" class="tag-badge" style="margin: 5px;">#{{ tag }} ({{ articles | count }})</a>
       {% endfor %}
     </div>
   </article>
