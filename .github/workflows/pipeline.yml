@@ -2,7 +2,7 @@ name: Daily Blog Pipeline
 
 on:
   schedule:
-    - cron: '57 1 * * *'  # KST 10:57 (UTC 01:57)
+    - cron: '57 13 * * *'  # KST 21:57 (UTC 13:57)
   workflow_dispatch:       # 수동 실행 가능
 
 jobs:
