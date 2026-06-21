@@ -3,6 +3,7 @@ blog:
   id: "khfamilylove"
   base_url: "https://blog.naver.com"
   rss_url: "https://rss.blog.naver.com/khfamilylove.xml"
+  site_url: "https://khcrew.github.io"
   api:
     post_list: "https://blog.naver.com/PostTitleListAsync.naver"
     post_view: "https://blog.naver.com/PostView.nhn"
