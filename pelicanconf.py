@@ -50,7 +50,7 @@ SITE_DESCRIPTION       = '대전 관평동 경희가족한의원의 건강노트
 SITE_SUBTITLE          = '대전 관평동 경희가족한의원<br>일상에 활력을 더하는 건강 정보 가이드'
 SITE_OG_LOCALE         = 'ko_KR'
 BUSINESS_ADDRESS_LOCALITY = '대전 관평동'
-GOOGLE_ANALYTICS       = ''
+GOOGLE_ANALYTICS       = 'G-7FPS4YC6SK'
 
 # ── Plugins ───────────────────────────────────────────────────
 PLUGINS = ['sitemap']
