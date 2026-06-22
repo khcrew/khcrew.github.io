@@ -38,7 +38,7 @@ jobs:
         run: uv sync
 
       - name: Build site
-        run: uv run python -m pelican site/content -o output -s publishconf.py
+        run: uv run python scripts/build.py --env production
 
       - name: Configure Pages
         uses: actions/configure-pages@v4
