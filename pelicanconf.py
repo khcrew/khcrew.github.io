@@ -18,6 +18,8 @@ STATIC_PATHS  = ['extra']
 EXTRA_PATH_METADATA = {
     'extra/robots.txt':   {'path': 'robots.txt'},
     'extra/favicon.ico':  {'path': 'favicon.ico'},
+    'extra/naver6dde713156c4669cf447817a818697fa.html':
+        {'path': 'naver6dde713156c4669cf447817a818697fa.html'},
 }
 DELETE_OUTPUT_DIRECTORY = True
 
