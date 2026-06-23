@@ -2,7 +2,7 @@ name: Daily Blog Pipeline
 
 on:
   schedule:
-    - cron: '57 13 * * *'  # KST 21:57 (UTC 13:57)
+    - cron: '57 14 * * *'  # KST 22:57 (UTC 14:57)
   workflow_dispatch:       # 수동 실행 가능
 
 jobs:
@@ -31,10 +31,9 @@ jobs:
 
       - name: Run pipeline
         env:
-          GEMINI_API_KEY_8074: ${{ secrets.GEMINI_API_KEY_8074 }}
-          GEMINI_API_KEY_8076: ${{ secrets.GEMINI_API_KEY_8076 }}
-          GEMINI_API_KEY_8078: ${{ secrets.GEMINI_API_KEY_8078 }}
-          GEMINI_API_KEY_8080: ${{ secrets.GEMINI_API_KEY_8080 }}
+          GEMINI_API_KEY_1_TEACUP8080: ${{ secrets.GEMINI_API_KEY_1_TEACUP8080 }}
+          GEMINI_API_KEY_2_EMPTYFULNESS: ${{ secrets.GEMINI_API_KEY_2_EMPTYFULNESS }}
+          GEMINI_API_KEY_3_TEACUP6379: ${{ secrets.GEMINI_API_KEY_3_TEACUP6379 }}
           MINIMAX_API_KEY: ${{ secrets.MINIMAX_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ vars.TELEGRAM_CHAT_ID }}
