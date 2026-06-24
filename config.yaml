@@ -37,7 +37,7 @@ gemini:
 # ─── MiniMax (Gemini 차단 시 폴백) ──────────────────────────────
 minimax:
   api_base: "https://api.minimax.io/v1"
-  model: "MiniMax-M2.7"
+  model: "MiniMax-M3"
   config:
     temperature: 0.8
     top_p: 0.95
