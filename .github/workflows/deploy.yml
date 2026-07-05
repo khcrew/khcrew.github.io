@@ -21,12 +21,12 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 1
 
       - name: Checkout shared source (khfamily)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: khfamily/khfamily.github.io
           token: ${{ secrets.GH_PAT }}
